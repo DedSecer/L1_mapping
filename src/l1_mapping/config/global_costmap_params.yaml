@@ -1,6 +1,6 @@
 global_costmap:
-  global_frame: camera_init
-  robot_base_frame: aft_mapped
+  global_frame: map
+  robot_base_frame: unilidar_lidar
   update_frequency: 5.0
   publish_frequency: 1.0
   static_map: false

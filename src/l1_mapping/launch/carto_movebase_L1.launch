@@ -48,15 +48,23 @@
       type="cartographer_node" args="
           -configuration_directory $(find l1_mapping)/config
           -configuration_basename l1.lua"
-      output="screen">
+      output="log">
     <!-- <remap from="scan" to="horizontal_laser_2d" /> -->
     <remap from="imu" to="/unilidar/imu" />
+
   </node>
 	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0 0 0 0 /unilidar_lidar /base_link 100"/>
 
   <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
       type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
+	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+	<rosparam file="$(find l1_mapping)/config/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
+		<rosparam file="$(find l1_mapping)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+		<rosparam file="$(find l1_mapping)/config/local_costmap_params.yaml" command="load" />
+		<rosparam file="$(find l1_mapping)/config/global_costmap_params.yaml" command="load" /> 
+		<rosparam file="$(find l1_mapping)/config/base_local_planner_params.yaml" command="load" />
+	</node>
 
   <node name="rviz" pkg="rviz" type="rviz" required="true"
-      args="-d $(find l1_mapping)/config/demo_2d.rviz" />
+      args="-d $(find l1_mapping)/config/demo_2d_movebase.rviz" />
 </launch>
