@@ -12,6 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   pointcloud_to_laserscan
   unitree_lidar_ros
+  move_base
   cartographer_ros
 )
 
