@@ -23,7 +23,7 @@
 	</node>
 
 	<!-- <node pkg="pcl_to_grid" type="cloud_subscriber" name="cloud_subscrier" output="screen"></node> -->
-
+	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.15 0 0 0 0 0 /aft_mapped /base_link 100"/>
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 		<rosparam file="$(find point_lio_unilidar)/params/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
 		<rosparam file="$(find point_lio_unilidar)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />

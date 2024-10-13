@@ -32,7 +32,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: ""
+    SyncSource: currPoints
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -72,7 +72,7 @@ Visualization Manager:
           Color: 238; 238; 236
           Color Transformer: FlatColor
           Decay Time: 0
-          Enabled: true
+          Enabled: false
           Invert Rainbow: false
           Max Color: 255; 255; 255
           Min Color: 238; 238; 236
@@ -87,12 +87,12 @@ Visualization Manager:
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
-          Value: true
+          Value: false
         - Alpha: 0.5
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 4.383843898773193
-            Min Value: 0.044409602880477905
+            Max Value: 4.8585357666015625
+            Min Value: -0.2383241355419159
             Value: true
           Axis: Z
           Channel Name: intensity
@@ -208,22 +208,22 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: local_cost_map
       Topic: /move_base/local_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: global_cost_map
       Topic: /move_base/global_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -281,6 +281,8 @@ Visualization Manager:
         All Enabled: true
         aft_mapped:
           Value: true
+        base_link:
+          Value: true
         camera_init:
           Value: true
       Marker Alpha: 1
@@ -292,7 +294,8 @@ Visualization Manager:
       Tree:
         camera_init:
           aft_mapped:
-            {}
+            base_link:
+              {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -323,7 +326,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 3.7321488857269287
+      Distance: 6.029109954833984
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -339,9 +342,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.2597965896129608
+      Pitch: 1.0697959661483765
       Target Frame: aft_mapped
-      Yaw: 3.34482741355896
+      Yaw: 3.0948219299316406
     Saved: ~
 Window Geometry:
   Displays:

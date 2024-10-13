@@ -1,7 +1,7 @@
 global_costmap:
     publish_voxel_map: true
     global_frame: camera_init
-    robot_base_frame: aft_mapped
+    robot_base_frame: base_link
     update_frequency: 5.0
     publish_frequency: 1.0
     static_map: false
