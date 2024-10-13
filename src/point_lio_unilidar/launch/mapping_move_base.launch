@@ -1,18 +1,25 @@
 <launch>
-	<!-- Launch file for Velodyne16 VLP-16 LiDAR -->
-	<!-- <param name="use_sim_time" value="true" /> -->
+<!-- Launch file for Velodyne16 VLP-16 LiDAR -->
+<!-- <param name="use_sim_time" value="true" /> -->
 
 	<arg name="rviz" default="true" />
 	<include file="$(find unitree_lidar_ros)/launch/run_without_rviz.launch" />
+	<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+		<remap from="cloud_in" to="/unilidar/cloud"/>
+		<rosparam file="$(find point_lio_unilidar)/params/pointcloud_to_laserscan.yaml" command="load" />
+	<!-- <remap from="scan" to="depth/scan_filtered"/> -->
+	</node>
+	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.20 0 0 0 0 0 /aft_mapped /base_link 100"/>
+	<node pkg="tf" type="static_transform_publisher" name="lidar_broadcaster" args="0 0 0 0 0 0 /aft_mapped /unilidar_lidar 100"/>
+
 	<node pkg="point_lio_unilidar" type="pointlio_mapping" name="laserMapping" output="screen">
 		<rosparam command="load" file="$(find point_lio_unilidar)/config/unilidar.yaml" />
-		
-		<!--change to 1 to use IMU as input of Point-LIO-->
-		<param name="use_imu_as_input" type="bool" value="0"/>
-		
+
+		<param name="use_imu_as_input" type="bool" value="1"/>
+
 		<param name="prop_at_freq_of_imu" type="bool" value="1"/>
 		<param name="check_satu" type="bool" value="1"/>
-		<param name="init_map_size" type="int" value="10"/>
+		<param name="init_map_size" type="int" value="5"/>
 		<param name="point_filter_num" type="int" value="1"/> <!--4, 3-->
 
 		<param name="space_down_sample" type="bool" value="1" />
@@ -22,8 +29,6 @@
 		<param name="runtime_pos_log_enable" type="bool" value="0" /> <!--1-->
 	</node>
 
-	<!-- <node pkg="pcl_to_grid" type="cloud_subscriber" name="cloud_subscrier" output="screen"></node> -->
-	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.15 0 0 0 0 0 /aft_mapped /base_link 100"/>
 	<node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
 		<rosparam file="$(find point_lio_unilidar)/params/costmap_common_params.yaml" command="load" ns="global_costmap" /> 
 		<rosparam file="$(find point_lio_unilidar)/params/costmap_common_params.yaml" command="load" ns="local_costmap" />
