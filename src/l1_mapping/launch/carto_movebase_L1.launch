@@ -23,8 +23,8 @@
         <rosparam>
             target_frame: unilidar_lidar # Leave disabled to output scan in pointcloud frame
             transform_tolerance: 0.01
-            min_height: 0
-            max_height: 1
+            min_height: -0.3
+            max_height: 0.8
 
             angle_min: -3.14 # -M_PI
             angle_max: 3.14 # M_PI
@@ -38,7 +38,7 @@
             # 0 : Detect number of cores
             # 1 : Single threaded
             # 2->inf : Parallelism level
-            concurrency_level: 1
+            concurrency_level: 0
         </rosparam>
 
     </node>
@@ -54,6 +54,8 @@
 
   </node>
 	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="0 0 0 0 0 0 /unilidar_lidar /base_link 100"/>
+  <node pkg="tf" type="static_transform_publisher" name="lidar_tf_broadcaster" args="0 0 0 0 0 0 /unilidar_lidar /unilidar_imu 100" />
+
 
   <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros"
       type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
