@@ -4,11 +4,8 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
-        - /Submaps1
         - /Submaps1/Submaps1
-        - /PointCloud21
-        - /Path1
-        - /Path2
+        - /local_costmap1
       Splitter Ratio: 0.6006709933280945
     Tree Height: 719
   - Class: rviz/Selection
@@ -67,6 +64,8 @@ Visualization Manager:
           Value: true
         odom:
           Value: true
+        unilidar_imu:
+          Value: true
         unilidar_lidar:
           Value: true
       Marker Alpha: 1
@@ -78,9 +77,10 @@ Visualization Manager:
       Tree:
         map:
           odom:
-            unilidar_lidar:
-              base_link:
-                {}
+            base_link:
+              unilidar_lidar:
+                unilidar_imu:
+                  {}
       Update Interval: 0
       Value: true
     - Class: Submaps
@@ -100,8 +100,11 @@ Visualization Manager:
           2.70: true
           3.70: true
           4.70: true
-          5.62: true
-          6.27: true
+          5.70: true
+          6.70: true
+          7.70: true
+          8.44: true
+          9.9: true
           Submap Pose Markers: false
           Value: true
       Topic: /submap_list
@@ -224,6 +227,35 @@ Visualization Manager:
       Topic: /move_base/current_goal
       Unreliable: false
       Value: true
+    - Alpha: 1
+      Class: rviz/Polygon
+      Color: 25; 255; 0
+      Enabled: true
+      Name: Polygon
+      Queue Size: 10
+      Topic: /move_base/local_costmap/footprint
+      Unreliable: false
+      Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: costmap
+      Draw Behind: false
+      Enabled: true
+      Name: global_costmap
+      Topic: /move_base/global_costmap/costmap
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
+    - Alpha: 0.699999988079071
+      Class: rviz/Map
+      Color Scheme: costmap
+      Draw Behind: false
+      Enabled: true
+      Name: local_costmap
+      Topic: /move_base/local_costmap/costmap
+      Unreliable: false
+      Use Timestamp: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 100; 100; 100
@@ -251,7 +283,7 @@ Visualization Manager:
   Value: true
   Views:
     Current:
-      Angle: 0
+      Angle: -1.6299992799758911
       Class: rviz/TopDownOrtho
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
@@ -261,10 +293,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Scale: 78.75508880615234
+      Scale: 116.62109375
       Target Frame: <Fixed Frame>
-      X: 0.9199429154396057
-      Y: 1.130326747894287
+      X: 0.6815868616104126
+      Y: 0.09841697663068771
     Saved: ~
 Window Geometry:
   Displays:
