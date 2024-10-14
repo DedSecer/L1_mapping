@@ -27,9 +27,10 @@ TrajectoryPlannerROS:
   holonomic_robot: true
 
 # Forward Simulation Parameters，前进模拟参数，可通过调试如下参数，使局部路径规划更贴合全局路径规划
-  sim_time: 0.8  # 提高sim_time值可使局部路径规划更符合全局路径规划
+  sim_time: 2.0  # 提高sim_time值可使局部路径规划更符合全局路径规划
   vx_samples: 18  
-  vtheta_samples: 20
+  vy_samples: 18
+  vtheta_samples: 5
   sim_granularity: 0.05
 
   occdist_scale: 0.01 # The weighting for how much the controller should attempt to avoid obstacles; default:0.01

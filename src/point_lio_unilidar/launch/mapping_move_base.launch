@@ -6,9 +6,15 @@
 	<include file="$(find unitree_lidar_ros)/launch/run_without_rviz.launch" />
 	<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
 		<remap from="cloud_in" to="/unilidar/cloud"/>
+		<remap from="scan" to="scan_unfiltered"/>
 		<rosparam file="$(find point_lio_unilidar)/params/pointcloud_to_laserscan.yaml" command="load" />
-	<!-- <remap from="scan" to="depth/scan_filtered"/> -->
 	</node>
+	<node pkg="laser_filters" type="scan_to_scan_filter_chain"  name="laser_filter">
+		<rosparam command="load" file="$(find point_lio_unilidar)/config/box_filter.yaml" />
+		<remap from="scan_filtered" to="scan" />
+		<remap from="scan" to="scan_unfiltered"/>
+	</node>
+
 	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.20 0 0 0 0 0 /aft_mapped /base_link 100"/>
 	<node pkg="tf" type="static_transform_publisher" name="lidar_broadcaster" args="0 0 0 0 0 0 /aft_mapped /unilidar_lidar 100"/>
 
