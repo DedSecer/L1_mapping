@@ -15,7 +15,7 @@
 		<remap from="scan" to="scan_unfiltered"/>
 	</node>
 
-	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.20 0 0 0 0 0 /aft_mapped /base_link 100"/>
+	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.20 0 0 0 0 3.1415 /aft_mapped /base_link 100"/>
 	<node pkg="tf" type="static_transform_publisher" name="lidar_broadcaster" args="0 0 0 0 0 0 /aft_mapped /unilidar_lidar 100"/>
 
 	<node pkg="point_lio_unilidar" type="pointlio_mapping" name="laserMapping" output="screen">

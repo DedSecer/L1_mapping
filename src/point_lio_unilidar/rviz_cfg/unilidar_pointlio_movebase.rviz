@@ -12,7 +12,7 @@ Panels:
         - /Odometry1/Odometry1/Covariance1
         - /Odometry1/Odometry1/Covariance1/Position1
         - /Odometry1/Odometry1/Covariance1/Orientation1
-        - /local_cost_map1
+        - /TF1/Frames1
       Splitter Ratio: 0.5094339847564697
     Tree Height: 865
   - Class: rviz/Selection
@@ -44,7 +44,7 @@ Visualization Manager:
       Cell Size: 1
       Class: rviz/Grid
       Color: 85; 87; 83
-      Enabled: true
+      Enabled: false
       Line Style:
         Line Width: 0.029999999329447746
         Value: Lines
@@ -57,7 +57,7 @@ Visualization Manager:
       Plane: XY
       Plane Cell Count: 100
       Reference Frame: <Fixed Frame>
-      Value: true
+      Value: false
     - Class: rviz/Group
       Displays:
         - Alpha: 1
@@ -91,8 +91,8 @@ Visualization Manager:
         - Alpha: 0.5
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 4.803569793701172
-            Min Value: -0.3231406509876251
+            Max Value: 0.07658852636814117
+            Min Value: -0.28749191761016846
             Value: true
           Axis: Z
           Channel Name: intensity
@@ -187,13 +187,13 @@ Visualization Manager:
       Name: Odometry
     - Alpha: 1
       Class: rviz/Axes
-      Enabled: true
+      Enabled: false
       Length: 1
       Name: Axes
       Radius: 0.10000000149011612
       Reference Frame: <Fixed Frame>
       Show Trail: false
-      Value: true
+      Value: false
     - Alpha: 0.699999988079071
       Class: rviz/Map
       Color Scheme: map
@@ -218,12 +218,12 @@ Visualization Manager:
       Class: rviz/Map
       Color Scheme: costmap
       Draw Behind: false
-      Enabled: false
+      Enabled: true
       Name: global_cost_map
       Topic: /move_base/global_costmap/costmap
       Unreliable: false
       Use Timestamp: false
-      Value: false
+      Value: true
     - Alpha: 1
       Buffer Length: 1
       Class: rviz/Path
@@ -278,15 +278,15 @@ Visualization Manager:
       Filter (whitelist): ""
       Frame Timeout: 15
       Frames:
-        All Enabled: true
+        All Enabled: false
         aft_mapped:
           Value: true
         base_link:
           Value: true
         camera_init:
-          Value: true
+          Value: false
         unilidar_lidar:
-          Value: true
+          Value: false
       Marker Alpha: 1
       Marker Scale: 1
       Name: TF
@@ -367,7 +367,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 6.619407653808594
+      Distance: 6.3953986167907715
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -375,17 +375,17 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: -0.9277454614639282
-        Y: 0.1093505322933197
+        X: 0.3224560618400574
+        Y: -0.2205410599708557
         Z: -2.2154239559313282e-05
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.2247958183288574
+      Pitch: 1.0197964906692505
       Target Frame: aft_mapped
-      Yaw: 3.034820795059204
+      Yaw: 5.028002738952637
     Saved: ~
 Window Geometry:
   Displays:
