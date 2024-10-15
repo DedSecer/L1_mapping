@@ -4,6 +4,7 @@ Panels:
     Name: Displays
     Property Tree Widget:
       Expanded:
+        - /mapping1
         - /mapping1/surround1
         - /mapping1/currPoints1
         - /mapping1/currPoints1/Autocompute Value Bounds1
@@ -32,7 +33,7 @@ Panels:
   - Class: rviz/Time
     Name: Time
     SyncMode: 0
-    SyncSource: LaserScan
+    SyncSource: currPoints
 Preferences:
   PromptSaveOnExit: true
 Toolbars:
@@ -91,8 +92,8 @@ Visualization Manager:
         - Alpha: 0.5
           Autocompute Intensity Bounds: true
           Autocompute Value Bounds:
-            Max Value: 4.872720718383789
-            Min Value: -0.04868938773870468
+            Max Value: 4.9600067138671875
+            Min Value: -0.03827060014009476
             Value: true
           Axis: Z
           Channel Name: intensity
@@ -111,7 +112,7 @@ Visualization Manager:
           Size (Pixels): 1.5
           Size (m): 0.009999999776482582
           Style: Boxes
-          Topic: /cloud_registered
+          Topic: /box_removal/output
           Unreliable: false
           Use Fixed Frame: true
           Use rainbow: true
@@ -144,7 +145,7 @@ Visualization Manager:
           Use Fixed Frame: true
           Use rainbow: true
           Value: false
-      Enabled: false
+      Enabled: true
       Name: mapping
     - Class: rviz/Group
       Displays:
@@ -370,7 +371,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 6.3953986167907715
+      Distance: 2.7622761726379395
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -378,8 +379,8 @@ Visualization Manager:
         Value: false
       Field of View: 0.7853981852531433
       Focal Point:
-        X: 0.3224560618400574
-        Y: -0.2205410599708557
+        X: -0.3007274270057678
+        Y: -0.14182838797569275
         Z: -2.2154239559313282e-05
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806

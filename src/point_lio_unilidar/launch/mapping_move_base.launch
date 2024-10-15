@@ -2,44 +2,70 @@
 <!-- Launch file for Velodyne16 VLP-16 LiDAR -->
 <!-- <param name="use_sim_time" value="true" /> -->
 
-	<arg name="rviz" default="true" />
-	<include file="$(find unitree_lidar_ros)/launch/run_without_rviz.launch" />
-	<node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
-		<remap from="cloud_in" to="/unilidar/cloud"/>
-		<remap from="scan" to="scan_unfiltered"/>
-		<rosparam file="$(find point_lio_unilidar)/params/pointcloud_to_laserscan.yaml" command="load" />
-	</node>
-	<node pkg="laser_filters" type="scan_to_scan_filter_chain"  name="laser_filter">
-		<rosparam command="load" file="$(find point_lio_unilidar)/config/box_filter.yaml" />
-		<remap from="scan_filtered" to="scan" />
-		<remap from="scan" to="scan_unfiltered"/>
-	</node>
+    <arg name="rviz" default="true" />
+    <include file="$(find unitree_lidar_ros)/launch/run_without_rviz.launch" />
 
-	<node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.20 0 0 0 0 0 /aft_mapped /base_link 100"/>
-	<node pkg="tf" type="static_transform_publisher" name="lidar_broadcaster" args="0 0 0 0 0 0 /aft_mapped /unilidar_lidar 100"/>
-	<node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 /map /camera_init 100"/>
+    <!-- <node pkg="pointcloud_to_laserscan" type="pointcloud_to_laserscan_node" name="pointcloud_to_laserscan">
+        <remap from="cloud_in" to="/unilidar/cloud"/>
+        <remap from="scan" to="scan_unfiltered"/>
+        <rosparam file="$(find point_lio_unilidar)/params/pointcloud_to_laserscan.yaml" command="load" />
+    </node>
+    <node pkg="laser_filters" type="scan_to_scan_filter_chain"  name="laser_filter">
+        <rosparam command="load" file="$(find point_lio_unilidar)/config/box_filter.yaml" />
+        <remap from="scan_filtered" to="scan" />
+        <remap from="scan" to="scan_unfiltered"/>
+    </node> -->
+    <node pkg="nodelet" type="nodelet" name="pcl_manager" args="manager" output="screen" />
 
-	<node pkg="point_lio_unilidar" type="pointlio_mapping" name="laserMapping" output="screen">
-		<rosparam command="load" file="$(find point_lio_unilidar)/config/unilidar.yaml" />
+    <!-- <node pkg="nodelet" type="nodelet" name="outlier_removal" args="load pcl/StatisticalOutlierRemoval pcl_manager" output="screen">
+        <remap from="~input" to="/unilidar/cloud" />
+        <rosparam>
+            mean_k: 2
+            stddev: 2
+            negative: False
+        </rosparam>
+    </node> -->
+    <node pkg="nodelet" type="nodelet" name="box_removal" args="load pcl/CropBox pcl_manager" output="screen">
+        <remap from="~input" to="/unilidar/cloud" />
+        <rosparam>
+            min_x: -0.57
+            max_x: 0.3
+            min_y: -0.28
+            max_y: 0.25
+            min_z: -0.2
+            max_z: 0.2
+            keep_organized : Flase
+            input_frame: base_link
+            output_frame: base_link
+            negative: True
+        </rosparam>
+    </node>
 
-		<param name="use_imu_as_input" type="bool" value="1"/>
+    <node pkg="tf" type="static_transform_publisher" name="base_to_laser_broadcaster" args="-0.20 0 0 0 0 0 /aft_mapped /base_link 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="lidar_broadcaster" args="0 0 0 0 0 0 /aft_mapped /unilidar_lidar 100"/>
+    <node pkg="tf" type="static_transform_publisher" name="map_broadcaster" args="0 0 0 0 0 0 /map /camera_init 100"/>
 
-		<param name="prop_at_freq_of_imu" type="bool" value="1"/>
-		<param name="check_satu" type="bool" value="1"/>
-		<param name="init_map_size" type="int" value="5"/>
-		<param name="point_filter_num" type="int" value="1"/> <!--4, 3-->
+    <node pkg="point_lio_unilidar" type="pointlio_mapping" name="laserMapping" output="screen">
+        <rosparam command="load" file="$(find point_lio_unilidar)/config/unilidar.yaml" />
 
-		<param name="space_down_sample" type="bool" value="1" />
-		<param name="filter_size_surf" type="double" value="0.1" /> <!--0.5, 0.3, 0.2, 0.15, 0.1-->
-		<param name="filter_size_map" type="double" value="0.1" /> <!--0.5, 0.3, 0.15, 0.1-->
-		<param name="cube_side_length" type="double" value="1000" /> <!--2000-->
-		<param name="runtime_pos_log_enable" type="bool" value="0" /> <!--1-->
-	</node>
+        <param name="use_imu_as_input" type="bool" value="1"/>
 
-	<include file="$(find go1_navigation)/launch/navigation.launch" />
+        <param name="prop_at_freq_of_imu" type="bool" value="1"/>
+        <param name="check_satu" type="bool" value="1"/>
+        <param name="init_map_size" type="int" value="5"/>
+        <param name="point_filter_num" type="int" value="1"/> <!--4, 3-->
 
-	<group if="$(arg rviz)">
-		<node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find point_lio_unilidar)/rviz_cfg/unilidar_pointlio_movebase.rviz" />
-	</group> launch-prefix="gdb -ex run --args"
+        <param name="space_down_sample" type="bool" value="1" />
+        <param name="filter_size_surf" type="double" value="0.1" /> <!--0.5, 0.3, 0.2, 0.15, 0.1-->
+        <param name="filter_size_map" type="double" value="0.1" /> <!--0.5, 0.3, 0.15, 0.1-->
+        <param name="cube_side_length" type="double" value="1000" /> <!--2000-->
+        <param name="runtime_pos_log_enable" type="bool" value="0" /> <!--1-->
+    </node>
+
+    <include file="$(find go1_navigation)/launch/navigation.launch" />
+
+    <group if="$(arg rviz)">
+        <node launch-prefix="nice" pkg="rviz" type="rviz" name="rviz" args="-d $(find point_lio_unilidar)/rviz_cfg/unilidar_pointlio_movebase.rviz" />
+    </group> launch-prefix="gdb -ex run --args"
 
 </launch>
