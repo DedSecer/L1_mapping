@@ -12,7 +12,7 @@ preprocess:
     lidar_type: 5
     scan_line: 18
     timestamp_unit: 0           # the unit of time/t field in the PointCloud2 rostopic: 0-second, 1-milisecond, 2-microsecond, 3-nanosecond.
-    blind: 0.5
+    blind: 1
 
 mapping:
     imu_en: true
@@ -55,5 +55,5 @@ publish:
 
 pcd_save:
     pcd_save_en: false       # save map to pcd file
-    interval: -1            # how many LiDAR frames saved in each pcd file; 
+    interval: 1            # how many LiDAR frames saved in each pcd file; 
                                  # -1 : all frames will be saved in ONE pcd file, may lead to memory crash when having too much frames.
