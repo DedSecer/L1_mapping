@@ -85,3 +85,10 @@ add_executable(pointlio_mapping
 )
 target_link_libraries(pointlio_mapping ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PYTHON_LIBRARIES})
 target_include_directories(pointlio_mapping PRIVATE ${PYTHON_INCLUDE_DIRS})
+
+add_executable(
+  forward_and_back
+  src/forward_and_back.cpp
+)
+target_link_libraries(forward_and_back ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${PYTHON_LIBRARIES})
+target_include_directories(forward_and_back PRIVATE ${PYTHON_INCLUDE_DIRS})

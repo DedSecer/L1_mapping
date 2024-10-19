@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find point_lio_unilidar)/launch/mapping_move_base.launch" />
+    <node pkg="point_lio_unilidar" type="forward_and_back" name="forward_and_back" output="screen">
+        <param name="forward_distance" type="double" value="1.0" />
+    </node>
+</launch>

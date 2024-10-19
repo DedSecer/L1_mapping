@@ -5,10 +5,10 @@ scan_filter_chain:
     box_frame: base_link
     min_x: -0.57
     max_x: 0.3
-    min_y: -0.19
-    max_y: 0.19
-    min_z: -0.2
-    max_z: 0.2
+    min_y: -0.21
+    max_y: 0.21
+    min_z: 0
+    max_z: 0.05
 - name: speckle_filter
   type: laser_filters/LaserScanSpeckleFilter
   params:

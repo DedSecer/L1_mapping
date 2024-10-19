@@ -61,7 +61,7 @@
         <param name="cube_side_length" type="double" value="1000" /> <!--2000-->
         <param name="runtime_pos_log_enable" type="bool" value="0" /> <!--1-->
     </node>
-
+    <node pkg="unitree_legged_real" type="twist_sub" name="twist_sub" />
     <include file="$(find go1_navigation)/launch/navigation.launch" />
 
     <group if="$(arg rviz)">
