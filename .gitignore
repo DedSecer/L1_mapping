@@ -1,6 +1,7 @@
 build
 devel
 .catkin_workspace
+.vscode
 src/CMakeLists.txt
 
 src/point_lio_unilidar/map
